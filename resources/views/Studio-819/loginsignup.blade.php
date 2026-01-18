@@ -1,27 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="pageTitle">Login</title>
-
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW-ALEwIH" crossorigin="anonymous">
-
+    
     <style>
-        /* login */
+        /* --- CSS VARIABLES --- */
         :root {
+            /* Colors */
+            --bg-nude: #e6d5c3;
+            --header-bg-color: #ebdfd1;
+            --text-color: #634832;
             --brand-color: #5a2025;
             --brand-color-hover: #45181c;
             --brand-color-rgb: 90, 32, 37;
+            --navbar-height: 80px; 
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
+            /* Important: Push content down so it doesn't hide behind navbar */
+            padding-top: var(--navbar-height);
+            background-color: #f8f9fa; /* Light gray background for login page */
         }
 
-        /* Button (Sign In) */
+        /* --- NAVBAR STYLES --- */
+        .custom-navbar {
+            background-color: var(--header-bg-color) !important;
+            padding-top: 0.75rem; 
+            padding-bottom: 0.75rem;
+            position: fixed; 
+            top: 0;
+            width: 100%;
+            height: var(--navbar-height); 
+            z-index: 1030; 
+        }
+
+        .custom-navbar .container-fluid {
+            height: 100%;
+        }
+
+        .navbar-brand-logo {
+            height: 55px; 
+        }
+
+        .custom-navbar .nav-link {
+            color: var(--text-color) !important;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        
+        .custom-navbar .nav-link:hover {
+            color: var(--brand-color) !important;
+        }
+
+        /* Sign In Button in Navbar */
+        .btn-sign-in {
+            background-color: var(--brand-color) !important;
+            border-color: var(--brand-color) !important;
+            color: white !important;
+            font-weight: 600;
+            padding: 0.375rem 1.25rem;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-sign-in:hover {
+            background-color: var(--brand-color-hover) !important;
+            border-color: var(--brand-color-hover) !important;
+            color: white !important;
+        }
+
+        /* --- LOGIN FORM STYLES --- */
+        
+        /* Primary Button (Form Submit) */
         .btn-primary {
             background-color: var(--brand-color) !important;
             border-color: var(--brand-color) !important;
@@ -33,7 +89,7 @@
             border-color: var(--brand-color-hover) !important;
         }
 
-        /* Link Overrides (Forgot Password, Create One) */
+        /* Links */
         .text-primary {
             color: var(--brand-color) !important;
             transition: color 0.2s ease;
@@ -43,15 +99,12 @@
             color: var(--brand-color-hover) !important;
         }
 
-        /* Form and Checkbox --- */
-
-        /* Border Color */
+        /* Inputs & Checks */
         .form-control:focus {
             border-color: var(--brand-color);
             box-shadow: 0 0 0 0.25rem rgba(var(--brand-color-rgb), 0.25);
         }
 
-        /* Checkbox Color */
         .form-check-input:checked {
             background-color: var(--brand-color);
             border-color: var(--brand-color);
@@ -63,41 +116,52 @@
             box-shadow: 0 0 0 0.25rem rgba(var(--brand-color-rgb), 0.25);
         }
 
-        /* Override for password field appearance */
+        /* Clean up password field icons */
         .input-group #loginPassword,
         .input-group #signupPassword,
         .input-group #confirmPassword {
-            /* Targeting the specific password input IDs for styling */
             background-image: none !important;
             padding-right: 0.75rem !important;
         }
 
+        /* Hide browser default password icons */
+        .input-group input[type="password"]::-ms-reveal,
         .input-group input[type="password"]::-webkit-contacts-auto-fill-button,
-        .input-group input[type="password"]::-webkit-inner-spin-button,
-        .input-group input[type="password"]::-webkit-outer-spin-button,
-        .input-group input[type="password"]::-webkit-search-cancel-button,
-        .input-group input[type="password"]::-webkit-search-results-button,
-        .input-group input[type="password"]::-webkit-clear-button {
-            -webkit-appearance: none !important;
+        .input-group input[type="password"]::-webkit-inner-spin-button {
             display: none !important;
         }
-
-        .input-group input[type="password"]::-ms-reveal {
-            display: none !important;
-        }
-
-        .input-group input[type="password"]:-webkit-autofill,
-        .input-group input[type="password"]:-webkit-autofill:hover,
-        .input-group input[type="password"]:-webkit-autofill:focus,
-        .input-group input[type="password"]:-webkit-autofill:active {
-            background-image: none !important;
-            -webkit-box-shadow: 0 0 0 1000px white inset !important;
-            transition: background-color 5000s ease-in-out 0s;
+        
+        /* Centering Wrapper */
+        .main-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - var(--navbar-height));
+            padding: 20px;
         }
     </style>
 </head>
 
 <body class="bg-light d-flex align-items-center justify-content-center min-vh-100 p-3">
+
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container-fluid container">
+            <a class="navbar-brand" href="index.html">
+                <img src="Images/logo.png" alt="Studio 819 Logo" class="navbar-brand-logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-lg-center">
+                    <li class="nav-item me-4"><a class="nav-link" href="{{ url('/Studio-819') }}">Home</a></li>
+                    <li class="nav-item me-4"><a class="nav-link" href="{{ url('/Studio-819-about') }}">About</a></li>
+                    <li class="nav-item me-4"><a class="nav-link" href="{{ url('/Studio-819-services') }}">Services</a></li>
+                    <li class="nav-item me-4"><a class="nav-link" href="{{ url('/Studio-819-contact') }}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <div class="container">
         <div class="row justify-content-center">
@@ -160,7 +224,9 @@
                             <p class="text-secondary small">Register to get started</p>
                         </div>
 
-                        <form action="{{ route('signup.submit') }}" method="POST" class="needs-validation" novalidate>
+                        <form action="{{ route('signup.submit') }}" method="POST" novalidate>
+                            @csrf
+
                             @csrf
 
                             <div class="mb-3">
@@ -356,24 +422,37 @@
 
             // Form Submission Handler
 
+            // Update this specific block in your <script>
             loginForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
 
                 const formData = new FormData(loginForm);
 
-                const response = await fetch("{{ route('login.submit') }}", {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    },
-                    body: formData
-                });
+                try {
+                    const response = await fetch("{{ route('login.submit') }}", {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Accept': 'application/json', // Add this to tell Laravel you want JSON or clear responses
+                        },
+                        body: formData
+                    });
 
-                if (response.redirected) {
-                    window.location.href = response.url; // Laravel redirect
-                } else {
-                    const html = await response.text();
-                    document.body.innerHTML = html; // display errors
+                    // Check if the response was successful (Redirects are followed by fetch automatically usually)
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                        return;
+                    }
+
+                    const result = await response.text();
+
+                    // If there's a validation error, Laravel returns a 422 or returns the view.
+                    // If not redirected, update the HTML
+                    document.querySelector('#formWrapper').innerHTML = result;
+
+                } catch (err) {
+                    console.error('Login error:', err);
+                    alert('An error occurred. Please try again.');
                 }
             });
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,29 +9,34 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
+
 <body>
 
-    <!-- Navbar Section -->
     <nav class="navbar navbar-expand-lg custom-navbar">
         <div class="container-fluid container">
-            <a class="navbar-brand" href="index.php">
+            <a class="navbar-brand" href="{{ route('Studio-819/index') }}">
                 <img src="Images/logo.png" alt="Studio 819 Logo" class="navbar-brand-logo">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav align-items-lg-center">
-                    <li class="nav-item me-4"><a class="nav-link" href="{{ url('/Studio-819') }}">Home</a></li>
-                    <li class="nav-item me-4"><a class="nav-link" href="{{ url('/Studio-819-about') }}">About</a></li>
-                    <li class="nav-item me-4"><a class="nav-link" href="{{ url('/Studio-819-services') }}">Services</a></li>
-                    <li class="nav-item me-4"><a class="nav-link" href="{{ url('/Studio-819-contact') }}">Contact</a></li>
-                    <li class="nav-item"><a class="btn btn-sign-in" href="{{ url('/Studio-819-login-singup') }}">Sign In</a></li>
+                    <li class="nav-item me-4"><a class="nav-link" href="{{ route('Studio-819/cust_index') }}">Home</a></li>
+                    <li class="nav-item me-4"><a class="nav-link" href="{{ route('Studio-819/cust_about') }}">About</a></li>
+                    <li class="nav-item me-4"><a class="nav-link" href="{{ route('Studio-819/cust_services') }}">Services</a></li>
+                    <li class="nav-item me-4"><a class="nav-link" href="{{ route('Studio-819/cust_contact') }}">Contact</a></li>
+
+                    <li class="nav-item">
+                        <a class="btn btn-outline-dark px-3 me-2" href="{{ route('user.profile') }}">
+                            <i class="bi bi-arrow-left me-1"></i> Back to Profile
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
-
     <!-- Hero Section -->
     <header class="hero-section">
         <div class="container-fluid p-0 d-flex hero-content-wrapper">
@@ -92,7 +98,7 @@
                         <!-- BASIC PACKAGE -->
                         <div class="service-card-item col-lg-4 col-md-6 mb-4">
                             <div class="service-card">
-                                <img src="Images/basic-preview.png" alt="Basic Package" class="card-img-top service-img"> 
+                                <img src="Images/basic-preview.png" alt="Basic Package" class="card-img-top service-img">
                                 <div class="card-content">
                                     <h3 class="card-title">Basic Package</h3>
                                     <p class="card-detail">1-2 pax</p>
@@ -131,7 +137,7 @@
                         <!-- LITE PACKAGE -->
                         <div class="service-card-item col-lg-4 col-md-6 mb-4">
                             <div class="service-card">
-                                <img src="Images/lite-preview.png" alt="Lite Package" class="card-img-top service-img"> 
+                                <img src="Images/lite-preview.png" alt="Lite Package" class="card-img-top service-img">
                                 <div class="card-content">
                                     <h3 class="card-title">Lite Package</h3>
                                     <p class="card-detail">1-2 pax</p>
@@ -193,148 +199,149 @@
 
     <!-- How to Book Section -->
     <section class="how-to-book-section">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="how-to-book-headline">How to Book?</h2>
-            <p class="how-to-book-subtext">Reserve your session in just a few simple steps!</p>
-        </div>
-
-        <div class="row justify-content-center how-to-book-steps-container">
-            <div class="how-to-book-step">
-                <div class="step-number">1</div>
-                <div class="step-text-content">
-                    <h3 class="step-title">Choose Your Package</h3>
-                    <p class="step-description">Select the photo package that fits your needs.</p>
-                </div>
-            </div>
-
-            <div class="step-arrow-container d-none d-lg-flex">
-                <i class="bi bi-chevron-right step-arrow"></i>
-            </div>
-            
-            <div class="how-to-book-step">
-                <div class="step-number">2</div>
-                <div class="step-text-content">
-                    <h3 class="step-title">Pick a Date & Time</h3>
-                    <p class="step-description">Check availability and reserve your preferred slot.</p>
-                </div>
-            </div>
-
-            <div class="step-arrow-container d-none d-lg-flex">
-                <i class="bi bi-chevron-right step-arrow"></i>
-            </div>
-
-            <div class="how-to-book-step final-step">
-                <div class="step-number">3</div>
-                <div class="step-text-content">
-                    <h3 class="step-title">Book & Pay Online</h3>
-                    <p class="step-description">Fill out the form and secure your session in seconds.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="text-center mt-5">
-            <a href="booking.php" class="btn btn-book-now">BOOK NOW</a>
-        </div>
-    </div>
-</section>
-
-<!-- Location Section -->
-<section class="location-section">
-    <div class="container">
-        <div class="row align-items-center">
-            
-            <div class="col-lg-6 mb-4 mb-lg-0 location-details-wrapper">
-                <h2 class="location-headline">Where can you find us?</h2>
-                
-                <div class="location-detail-block">
-                    <p class="location-title">Studio 819</p>
-                    <p class="location-text">
-                        172 General Luna St., Herrera, Malabon City
-                        <br>(2nd Floor, Above Alfamart)
-                    </p>
-                </div>
-
-                <div class="location-contact-item mt-4">
-                    <i class="bi bi-telephone-fill"></i>
-                    <p class="location-text">0916 850 2077</p>
-                </div>
-
-                <div class="location-contact-item">
-                    <i class="bi bi-envelope-fill"></i>
-                    <p class="location-text"><a href="mailto:studio819ph@gmail.com">studio819ph@gmail.com</a></p>
-                </div>
-            </div>
-
-            <div class="col-lg-6 location-map-wrapper">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d341.16614999134043!2d120.94931020546436!3d14.66420467361465!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b58c7293541d%3A0x4b714ce5af4c392f!2sStudio%20819%20Self-Photo%20Studio!5e0!3m2!1sen!2sph!4v1765383247167!5m2!1sen!2sph" 
-                    width="100%" 
-                    height="400" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade"
-                    class="location-map">
-                </iframe>
-            </div>
-
-        </div>
-    </div>
-</section>
-
- <!-- Footer Section -->
-    <section class="footer-section">
-
-    <section class="footer-section">
         <div class="container">
-            <div class="row align-items-center"> 
-                
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <h4 class="mb-4">Message Us</h4>
-                    <form class="contact-form">
-                        <input type="text" class="form-control" placeholder="Your Name" required>
-                        <input type="email" class="form-control" placeholder="Your Email" required>
-                        <textarea class="form-control" placeholder="Your Message" rows="5" required></textarea>
-                        <button type="submit" class="btn btn-send">SEND</button>
-                    </form>
-                </div>
-                
-                <div class="col-lg-6 contact-details-footer">
-                    
-                    <div class="contact-details-inner ms-auto">
-                        <div>
-                            <h4>Call Us On</h4>
-                            <div class="detail">
-                                <a href="tel:09168502077">0916 850 2077</a>
-                            </div>
-                        </div>
+            <div class="text-center mb-5">
+                <h2 class="how-to-book-headline">How to Book?</h2>
+                <p class="how-to-book-subtext">Reserve your session in just a few simple steps!</p>
+            </div>
 
-                        <div>
-                            <h4>Or Email Us</h4>
-                            <div class="detail">
-                                <a href="mailto:studio819ph@gmail.com">studio819ph@gmail.com</a>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <h4>Social Us</h4>
-                            <div class="social-links">
-                                <a href="https://facebook.com/studio819ph" target="_blank" aria-label="Facebook">
-                                    <i class="bi bi-facebook"></i>
-                                </a>
-                                <a href="https://instagram.com/studio819ph" target="_blank" aria-label="Instagram">
-                                    <i class="bi bi-instagram"></i>
-                                </a>
-                            </div>
-                        </div>
+            <div class="row justify-content-center how-to-book-steps-container">
+                <div class="how-to-book-step">
+                    <div class="step-number">1</div>
+                    <div class="step-text-content">
+                        <h3 class="step-title">Choose Your Package</h3>
+                        <p class="step-description">Select the photo package that fits your needs.</p>
                     </div>
-
                 </div>
+
+                <div class="step-arrow-container d-none d-lg-flex">
+                    <i class="bi bi-chevron-right step-arrow"></i>
+                </div>
+
+                <div class="how-to-book-step">
+                    <div class="step-number">2</div>
+                    <div class="step-text-content">
+                        <h3 class="step-title">Pick a Date & Time</h3>
+                        <p class="step-description">Check availability and reserve your preferred slot.</p>
+                    </div>
+                </div>
+
+                <div class="step-arrow-container d-none d-lg-flex">
+                    <i class="bi bi-chevron-right step-arrow"></i>
+                </div>
+
+                <div class="how-to-book-step final-step">
+                    <div class="step-number">3</div>
+                    <div class="step-text-content">
+                        <h3 class="step-title">Book & Pay Online</h3>
+                        <p class="step-description">Fill out the form and secure your session in seconds.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="booking.php" class="btn btn-book-now">BOOK NOW</a>
             </div>
         </div>
     </section>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+
+    <!-- Location Section -->
+    <section class="location-section">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <div class="col-lg-6 mb-4 mb-lg-0 location-details-wrapper">
+                    <h2 class="location-headline">Where can you find us?</h2>
+
+                    <div class="location-detail-block">
+                        <p class="location-title">Studio 819</p>
+                        <p class="location-text">
+                            172 General Luna St., Herrera, Malabon City
+                            <br>(2nd Floor, Above Alfamart)
+                        </p>
+                    </div>
+
+                    <div class="location-contact-item mt-4">
+                        <i class="bi bi-telephone-fill"></i>
+                        <p class="location-text">0916 850 2077</p>
+                    </div>
+
+                    <div class="location-contact-item">
+                        <i class="bi bi-envelope-fill"></i>
+                        <p class="location-text"><a href="mailto:studio819ph@gmail.com">studio819ph@gmail.com</a></p>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 location-map-wrapper">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d341.16614999134043!2d120.94931020546436!3d14.66420467361465!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b58c7293541d%3A0x4b714ce5af4c392f!2sStudio%20819%20Self-Photo%20Studio!5e0!3m2!1sen!2sph!4v1765383247167!5m2!1sen!2sph"
+                        width="100%"
+                        height="400"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="location-map">
+                    </iframe>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <section class="footer-section">
+
+        <section class="footer-section">
+            <div class="container">
+                <div class="row align-items-center">
+
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <h4 class="mb-4">Message Us</h4>
+                        <form class="contact-form">
+                            <input type="text" class="form-control" placeholder="Your Name" required>
+                            <input type="email" class="form-control" placeholder="Your Email" required>
+                            <textarea class="form-control" placeholder="Your Message" rows="5" required></textarea>
+                            <button type="submit" class="btn btn-send">SEND</button>
+                        </form>
+                    </div>
+
+                    <div class="col-lg-6 contact-details-footer">
+
+                        <div class="contact-details-inner ms-auto">
+                            <div>
+                                <h4>Call Us On</h4>
+                                <div class="detail">
+                                    <a href="tel:09168502077">0916 850 2077</a>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4>Or Email Us</h4>
+                                <div class="detail">
+                                    <a href="mailto:studio819ph@gmail.com">studio819ph@gmail.com</a>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4>Social Us</h4>
+                                <div class="social-links">
+                                    <a href="https://facebook.com/studio819ph" target="_blank" aria-label="Facebook">
+                                        <i class="bi bi-facebook"></i>
+                                    </a>
+                                    <a href="https://instagram.com/studio819ph" target="_blank" aria-label="Instagram">
+                                        <i class="bi bi-instagram"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="script.js"></script>
 </body>
+
 </html>

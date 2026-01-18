@@ -476,22 +476,25 @@
 
     <nav class="navbar navbar-expand-lg custom-navbar">
         <div class="container-fluid container">
-            
-            <a class="navbar-brand" href="index.php">
+            <a class="navbar-brand" href="{{ route('Studio-819/index') }}">
                 <img src="Images/logo.png" alt="Studio 819 Logo" class="navbar-brand-logo">
             </a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav align-items-lg-center">
-                    <li class="nav-item me-4"><a class="nav-link" href="{{ url('/Studio-819') }}">Home</a></li>
-                    <li class="nav-item me-4"><a class="nav-link" href="{{ url('/Studio-819-about') }}">About</a></li>
-                    <li class="nav-item me-4"><a class="nav-link" href="{{ url('/Studio-819-services') }}">Services</a></li>
-                    <li class="nav-item me-4"><a class="nav-link" href="{{ url('/Studio-819-contact') }}">Contact</a></li>
-                    <li class="nav-item"><a class="btn btn-sign-in" href="{{ url('/Studio-819-login-singup') }}">Sign In</a></li>
+                    <li class="nav-item me-4"><a class="nav-link" href="{{ route('Studio-819/cust_index') }}">Home</a></li>
+                    <li class="nav-item me-4"><a class="nav-link" href="{{ route('Studio-819/cust_about') }}">About</a></li>
+                    <li class="nav-item me-4"><a class="nav-link" href="{{ route('Studio-819/cust_services') }}">Services</a></li>
+                    <li class="nav-item me-4"><a class="nav-link" href="{{ route('Studio-819/cust_contact') }}">Contact</a></li>
+
+                    <li class="nav-item">
+                        <a class="btn btn-outline-dark px-3 me-2" href="{{ route('user.profile') }}">
+                            <i class="bi bi-arrow-left me-1"></i> Back to Profile
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -11,7 +11,7 @@ class User extends Authenticatable
 
     public $timestamps = false; // 🔥 IMPORTANT FIX
 
-     // ✅ Add this
+    // ✅ Add this
     protected $fillable = [
         'first_name',
         'last_name',
@@ -29,5 +29,12 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class, 'role_id', 'role_id');
+    }
+    // app/Models/User.php
+
+    public function customer()
+    {
+        // Make sure 'user_id' matches the primary key name in your users table
+        return $this->hasOne(Customer::class, 'user_id', 'user_id');
     }
 }

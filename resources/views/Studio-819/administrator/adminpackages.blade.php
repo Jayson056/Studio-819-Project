@@ -1,290 +1,321 @@
-<?php
-$adminName = "Admin";
-?>
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Studio 819 Admin Panel</title>
+    <title>Packages - Studio 819</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         :root {
-            --sidebar-bg: #EAE2D6;
-            --main-bg-overlay: rgba(234, 226, 214, 0);
-            --accent-red: #801B1B;
-            --text-dark: #4A3728;
-            --card-bg: #4A322C;
+            --brand-maroon: #5a2025;
+            --brand-maroon-hover: #45181c;
+            --bg-beige: #dac0ab;
+            --sidebar-beige: #ebe0d3;
+            --sidebar-width: 250px;
+            --text-dark: #634832;
+            --table-header: #6f513a;
         }
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        /* Background Image Setup */
-        .wrapper {
-            display: flex;
-            height: 100vh;
-            background: url('Images/BG.png') no-repeat center center;
-            background-size: cover;
-        }
-
-        /* Sidebar Styling */
-        .sidebar {
-            width: 250px;
-            background-color: var(--sidebar-bg);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 20px;
-            border-right: 1px solid #CCC;
-        }
-
-        .logout-container {
-            margin-top: auto;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            padding-bottom: 30px;
-        }
-
-        .logo-area {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .logo-area h1 {
-            margin: 0;
-            font-size: 28px;
+        body {
+            background-color: var(--bg-beige);
+            font-family: 'Segoe UI', sans-serif;
             color: var(--text-dark);
-            font-weight: bold;
-        }
-
-        .logo-area p {
             margin: 0;
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
         }
 
-        .nav-buttons {
-            width: 100%;
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background-color: var(--sidebar-beige);
+            position: fixed;
+            padding: 30px 20px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
             align-items: center;
         }
 
         .nav-btn {
-            width: 70%;
-            padding: 15px;
-            background-color: var(--accent-red);
+            display: block;
+            width: 100%;
+            background-color: var(--brand-maroon);
             color: white;
-            border: none;
-            border-radius: 8px;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 12px;
             text-transform: uppercase;
-            font-weight: bold;
-            cursor: pointer;
             text-decoration: none;
             text-align: center;
+            font-weight: 700;
+        }
+
+        .nav-btn.active {
+            background-color: var(--brand-maroon-hover);
         }
 
         .logout-btn {
             margin-top: auto;
-            margin-bottom: 30px;
-            background-color: #4A2020;
-            padding: 10px 10px;
-            border-radius: 20px;
+            background-color: #3d1417;
+            width: 140px;
+            border-radius: 25px;
+            cursor: pointer;
+            border: none;
         }
 
-        /* Main Content Area */
         .main-content {
-            flex-grow: 1;
-            background-color: transparent;
-            display: flex;
-            flex-direction: column;
+            margin-left: var(--sidebar-width);
+            padding: 40px 60px;
         }
 
-        /* Top Header */
-        .header {
-            padding: 20px 40px;
+        .package-tabs {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #AAA;
+            justify-content: center;
+            gap: 50px;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #9e9e9e;
         }
 
-        .dashboard-title {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 32px;
+        .tab-link {
+            font-size: 1.5rem;
             font-weight: bold;
-            color: var(--text-dark);
+            color: white;
+            cursor: pointer;
+            opacity: 0.7;
+            padding-bottom: 10px;
         }
 
-        .admin-profile {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .tab-link.active {
+            opacity: 1;
+            border-bottom: 4px solid white;
+            margin-bottom: -4px;
         }
 
-        .admin-profile img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .packages-container {
-            padding: 30px 40px;
-        }
-
-        .packages-table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
+        .table-container {
+            background: white;
+            border-radius: 8px;
             overflow: hidden;
         }
 
-        .packages-table th,
-        .packages-table td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-            color: var(--text-dark);
-            vertical-align: top;
-        }
-
-        .packages-table th {
-            background-color: var(--accent-red);
+        .table thead th {
+            background-color: var(--table-header);
             color: white;
-            text-transform: uppercase;
-            font-size: 14px;
+            text-align: center;
+            padding: 15px;
         }
 
-        .packages-table tr:hover {
-            background-color: #f5f0ea;
-        }
-
-        .delete-btn {
-            background-color: #801B1B;
+        .btn-brand-action {
+            background-color: var(--brand-maroon);
             color: white;
             border: none;
-            padding: 8px 14px;
-            border-radius: 6px;
-            cursor: pointer;
+            padding: 8px 25px;
+            border-radius: 5px;
             font-weight: bold;
         }
 
-        .delete-btn:hover {
-            background-color: #5e1414;
+        .table-section {
+            display: none;
         }
 
-        .add-package-btn {
-            margin-top: 20px;
-            background-color: var(--accent-red);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
+        .table-section.active {
+            display: block;
         }
-
-        .add-package-btn:hover {
-            background-color: #5e1414;
-        }
-
-
-
-        
     </style>
 </head>
+
 <body>
 
-<div class="wrapper">
-    <div class="sidebar">
-        <div class="logo-area">
-            <img src="Images/logo.png" alt="Studio 819 Logo" width="170">
+    <nav class="sidebar">
+        <div class="logo-section mb-4"><img src="Images/logo.png" style="width:180px;"></div>
+        <div class="nav-links-container w-100">
+            <a href="{{ route('admin.dashboard') }}" class="nav-btn">Dashboard</a>
+            <a href="{{ route('admin.bookings') }}" class="nav-btn {{ Request::is('admin/bookings*') ? 'active' : '' }}">Bookings</a>
+            <a href="{{ route('admin.customer') }}" class="nav-btn">Customers</a>
+            <a href="#" class="nav-btn active">Packages</a>
+           <a href="{{ route('admin.payment') }}" class="nav-btn {{ Request::is('Studio-819-/admin/payment*') ? 'active' : '' }}">
+    Payment
+</a>
         </div>
 
-            <div class="nav-buttons">
-                <a href="{{ route('admin.dashboard') }}" class="nav-btn">Dashboard</a>
-                <a href="{{ route('admin.customer') }}" class="nav-btn">Customers</a>
-                <a href="{{ route('admin.packages') }}" class="nav-btn">Packages</a>
-            </div>
+        <a href="#" class="nav-btn logout-btn"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Logout
+        </a>
 
-            <div class="logout-container">
-                <form action="{{ route('admin.logout') }}" method="POST"
-                    style="width:100%; display:flex; justify-content:center;">
-                    @csrf
-                    <button type="submit" class="nav-btn logout-btn">
-                        Logout
-                    </button>
-                </form>
-            </div>
 
-    </div>
+    </nav>
 
-    <div class="main-content">
-        <header class="header">
-            <div class="dashboard-title">
-                <span>📦</span> Packages
-            </div>
-            <div class="admin-profile">
-                <img src="Images/cat.png" alt="Admin Profile">
-                <span>Hello, <u><?php echo $adminName; ?>!</u></span>
-            </div>
+    <main class="main-content">
+        <header class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="fw-bold"><i class="bi bi-box-seam-fill"></i> Packages</h1>
+            <div>Hello, <strong>Admin!</strong></div>
         </header>
 
-            <div class="packages-container">
-            <h2>All Packages</h2>
-
-            <table class="packages-table">
-                <thead>
-                    <tr>
-                        <th>Package ID</th>
-                        <th>Package Name</th>
-                        <th>Package Description</th>
-                        <th>Unit Price</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>001</td>
-                        <td>Lite Package</td>
-                        <td>
-                            Ideal for 1–2 persons and includes a 10-minute self-photoshoot,
-                            5 minutes for photo selection, 5 digital copies, one 4R print,
-                            and 4 photo cards. Choose one backdrop from seven colors for a
-                            complete 15-minute experience.
-                        </td>
-                        <td>P350.00</td>
-                        <td>
-                            <form method="post" action="deletepackage.php">
-                                <input type="hidden" name="package_id" value="001">
-                                <button type="submit" class="delete-btn">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <a href="addpackage.php" class="add-package-btn">+ Add New Package</a>
+        <div class="package-tabs">
+            <div class="tab-link active" onclick="switchTab('packages')">Package</div>
+            <div class="tab-link" onclick="switchTab('backdrops')">Backdrop</div>
+            <div class="tab-link" onclick="switchTab('addons')">Add On</div>
         </div>
 
+        <div class="d-flex justify-content-between mb-3">
+            <div class="d-flex gap-2">
+                <input type="text" class="form-control" placeholder="Search..." style="width:300px;">
+                <button class="btn-brand-action">SEARCH</button>
+            </div>
+            <button class="btn-brand-action" onclick="openAddModal()">
+                <i class="bi bi-plus-lg"></i> <span id="addBtnText">Add Package</span>
+            </button>
+        </div>
 
+        <div class="table-container">
+            <div id="packagesSection" class="table-section active">
+                <table class="table text-center align-middle">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Package</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($packages as $p)
+                        <tr>
+                            <td>#{{ $p->package_id }}</td>
+                            <td>{{ $p->package_name }}</td>
+                            <td>₱{{ number_format($p->base_price, 2) }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-success" onclick="openEditModal('package', '{{ $p->package_id }}', '{{ $p->package_name }}', '{{ $p->base_price }}')"><i class="bi bi-pencil"></i></button>
+                                <form action="{{ route('admin.packages.delete', ['type'=>'package', 'id'=>$p->package_id]) }}" method="POST" class="d-inline">
+                                    @csrf @method('DELETE')
+                                    <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
+            <div id="backdropsSection" class="table-section">
+                <table class="table text-center align-middle">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Backdrop</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($backdrops as $b)
+                        <tr>
+                            <td>#{{ $b->backdrop_id }}</td>
+                            <td>{{ $b->backdrop_name }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-success" onclick="openEditModal('backdrop', '{{ $b->backdrop_id }}', '{{ $b->backdrop_name }}', 0)"><i class="bi bi-pencil"></i></button>
+                                <form action="{{ route('admin.packages.delete', ['type'=>'backdrop', 'id'=>$b->backdrop_id]) }}" method="POST" class="d-inline">
+                                    @csrf @method('DELETE')
+                                    <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
-        </header>
+            <div id="addonsSection" class="table-section">
+                <table class="table text-center align-middle">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Add On</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($addons as $a)
+                        <tr>
+                            <td>#{{ $a->addon_id }}</td>
+                            <td>{{ $a->addon_name }}</td>
+                            <td>₱{{ number_format($a->price, 2) }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-success" onclick="openEditModal('addon', '{{ $a->addon_id }}', '{{ $a->addon_name }}', '{{ $a->price }}')"><i class="bi bi-pencil"></i></button>
+                                <form action="{{ route('admin.packages.delete', ['type'=>'addon', 'id'=>$a->addon_id]) }}" method="POST" class="d-inline">
+                                    @csrf @method('DELETE')
+                                    <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
 
+    <div class="modal fade" id="itemModal" tabindex="-1">
+        <div class="modal-dialog">
+            <form action="{{ route('admin.packages.store') }}" method="POST" id="modalForm">
+                @csrf
+                <div id="methodField"></div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">Add Item</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="itemId">
+                        <input type="hidden" name="type" id="itemType">
+                        <div class="mb-3"><label>Name</label><input type="text" name="name" id="itemName" class="form-control" required></div>
+                        <div class="mb-3" id="priceInputDiv"><label>Price</label><input type="number" step="0.01" name="price" id="itemPrice" class="form-control"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentTab = 'packages';
+        const itemModal = new bootstrap.Modal(document.getElementById('itemModal'));
+
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('.table-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(tab + 'Section').classList.add('active');
+            document.getElementById('addBtnText').textContent = "Add " + tab.charAt(0).toUpperCase() + tab.slice(1, -1);
+        }
+
+        function openAddModal() {
+            document.getElementById('modalTitle').textContent = "Add " + currentTab;
+            document.getElementById('modalForm').action = "{{ route('admin.packages.store') }}";
+            document.getElementById('methodField').innerHTML = "";
+            document.getElementById('itemType').value = currentTab.slice(0, -1); // 'package', 'addon', etc
+            document.getElementById('itemName').value = "";
+            document.getElementById('itemPrice').value = "";
+            document.getElementById('priceInputDiv').style.display = currentTab === 'backdrops' ? 'none' : 'block';
+            itemModal.show();
+        }
+
+        function openEditModal(type, id, name, price) {
+            document.getElementById('modalTitle').textContent = "Edit " + type;
+            document.getElementById('modalForm').action = "{{ route('admin.packages.update') }}";
+            document.getElementById('methodField').innerHTML = '<input type="hidden" name="_method" value="PUT">';
+            document.getElementById('itemType').value = type;
+            document.getElementById('itemId').value = id;
+            document.getElementById('itemName').value = name;
+            document.getElementById('itemPrice').value = price;
+            document.getElementById('priceInputDiv').style.display = type === 'backdrop' ? 'none' : 'block';
+            itemModal.show();
+        }
+    </script>
 </body>
+
 </html>

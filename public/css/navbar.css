@@ -1,0 +1,90 @@
+/* ===== Navbar Variables ===== */
+:root {
+    --header-bg-color: #ebdfd1;
+    --text-color: #634832;
+    --brand-color: #8E272F; /* Matching the red from your 'Send' button */
+    --brand-color-hover: #5a2025;
+    --navbar-height: 80px;
+}
+
+/* Push content below fixed navbar */
+body {
+    padding-top: var(--navbar-height);
+}
+
+/* ===== Navbar Styles ===== */
+.custom-navbar {
+    background-color: var(--header-bg-color);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    min-height: var(--navbar-height);
+    z-index: 1030;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* Subtle separation from content */
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand-logo {
+    height: 50px; /* Adjusted for better balance */
+    width: auto;
+}
+
+/* Nav links */
+.custom-navbar .nav-link {
+    color: var(--text-color) !important;
+    font-weight: 600;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.5rem 1.2rem !important;
+    transition: all 0.3s ease;
+}
+
+.custom-navbar .nav-link:hover, 
+.custom-navbar .nav-link.active {
+    color: var(--brand-color) !important;
+}
+
+/* Custom indicator for the Active link */
+.custom-navbar .nav-link.active {
+    position: relative;
+}
+
+@media (min-width: 992px) {
+    .custom-navbar .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 1.2rem;
+        right: 1.2rem;
+        height: 2px;
+        background-color: var(--brand-color);
+    }
+}
+
+/* Sign In button */
+.btn-sign-in {
+    background-color: var(--brand-color) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 600;
+    padding: 8px 25px !important;
+    border-radius: 5px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.btn-sign-in:hover {
+    background-color: var(--brand-color-hover) !important;
+    transform: translateY(-1px);
+}
+
+/* Mobile Toggler Customization */
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}

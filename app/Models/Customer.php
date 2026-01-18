@@ -21,5 +21,11 @@ class Customer extends Model
         'first_name',
         'last_name',
         'phone_number',
+        // Do not put email/password here if they are in the users table
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
+    }
 }
