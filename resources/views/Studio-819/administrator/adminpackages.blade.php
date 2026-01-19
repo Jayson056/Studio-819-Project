@@ -172,7 +172,7 @@
                 <table class="table text-center align-middle">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>Package-ID</th>
                             <th>Package</th>
                             <th>Price</th>
                             <th>Action</th>

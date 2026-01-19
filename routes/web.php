@@ -93,6 +93,15 @@ Route::get('/Studio-819-admin-register', [AdminController::class, 'showRegister'
 Route::post('/Studio-819-admin-register', [AdminController::class, 'register'])
     ->name('admin.register.submit');
 
+
+// Route to show the registration form
+Route::get('/admin/register', [AdminController::class, 'showAdminRegister'])->name('admin.register');
+
+// Route to handle the form submission
+Route::post('/admin/register-submit', [AdminController::class, 'registerAdmin'])->name('admin.register.submit');
+
+    
+
 // Admin Dashboard Route
 Route::get('/Studio-819-admin-dashboard', function () {
     if (!Auth::check() || Auth::user()->role->role_name !== 'admin') {

@@ -173,6 +173,43 @@ class AdminController extends Controller
         );
     }
 
+
+
+
+    public function showAdminRegister()
+{
+    $adminName = 'Admin'; // For sidebar/header consistency
+    return view('admin-register', compact('adminName'));
+}
+
+public function registerAdmin(Request $request)
+{
+    // 1. Validate the input
+    $request->validate([
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|string|min:8|confirmed',
+    ]);
+
+    // 2. Find the Admin Role ID (Assuming 'admin' role exists in roles table)
+    $adminRole = DB::table('roles')->where('role_name', 'admin')->first();
+
+    if (!$adminRole) {
+        return back()->withErrors(['email' => 'Admin role not found in database.']);
+    }
+
+    // 3. Insert the new Admin user
+    DB::table('users')->insert([
+        'email' => $request->email,
+        'password_hash' => Hash::make($request->password),
+        'role_id' => $adminRole->role_id,
+        'status' => 'Active',
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+
+    return redirect()->route('admin.dashboard')->with('success', 'New Admin account created successfully!');
+}
+
     
 
 }

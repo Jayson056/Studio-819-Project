@@ -44,7 +44,7 @@
                     <p class="hero-description hero-home-text">
                         Studio 819 turns moments into memories. Capture love, life, and everything in between.
                     </p>
-                    <a href="booking.php" class="btn btn-primary btn-book-now mt-4">Book Now</a>
+                    <a href="{{ url('/Studio-819-login-singup') }}" class="btn btn-primary btn-book-now mt-4">Book Now</a>
                 </div>
             </div>
             <div class="hero-image-right col-lg-6 d-none d-lg-block">

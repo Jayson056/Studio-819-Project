@@ -290,7 +290,7 @@ class UserController extends Controller
 
             // FIX: Redirect to a URL if the Route Name is missing
             // Change '/Studio-819-cust_index' to whatever your actual URL path is
-            return redirect('/Studio-819-cust_index')->with('success', 'Booking submitted successfully!');
+            return redirect('/Studio-819-profile')->with('success', 'Booking submitted successfully!');
         });
     }
 }

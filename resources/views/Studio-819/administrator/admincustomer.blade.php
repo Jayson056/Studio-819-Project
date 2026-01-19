@@ -61,7 +61,7 @@
             <table class="table text-center align-middle">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Customer-ID</th>
                         <th>Profile</th>
                         <th>Full Name</th>
                         <th>Email</th>
