@@ -36,7 +36,7 @@ class UserController extends Controller
 
     public function services()
     {
-        return view('Studio-819.services');
+        return view('Studio-819.Services');
     }
 
     public function booking()
