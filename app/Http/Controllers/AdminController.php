@@ -117,19 +117,27 @@ class AdminController extends Controller
     =========================== */
     public function adminDashboard()
     {
-        if (!Auth::check() || Auth::user()->role->role_name !== 'admin') {
-            return redirect()->route('admin.login');
-        }
-
-        $adminName = 'Admin';
-
-        $totalUsers = DB::table('users')->count();
+        $adminName = "Admin";
+        
+        $totalUsers = DB::table('users')->where('role_id', 2)->count();
+        $totalBookings = DB::table('bookings')->count();
+        
+        // Dynamic Revenue Calculation
+        $totalRevenue = DB::table('payments')
+            ->where('payment_status', 'Verified')
+            ->sum('amount');
+            
         $totalPackages = DB::table('packages')->count();
+        $totalAddOns = DB::table('addons')->count();
 
-        return view(
-            'Studio-819.administrator.admindashboard',
-            compact('adminName', 'totalUsers', 'totalPackages')
-        );
+        return view('Studio-819.administrator.admindashboard', compact(
+            'adminName',
+            'totalUsers',
+            'totalBookings',
+            'totalRevenue',
+            'totalPackages',
+            'totalAddOns'
+        ));
     }
 
     /* ===========================
@@ -163,53 +171,87 @@ class AdminController extends Controller
     {
         $adminName = 'Admin';
 
-        $packages = DB::table('packages')
-            ->select('package_id', 'package_name', 'base_price')
-            ->get();
+        $packages = DB::table('packages')->get();
+        $addons = DB::table('addons')->get();
+        $backdrops = DB::table('backdrops')->get();
 
-        return view(
-            'Studio-819.administrator.adminpackages',
-            compact('adminName', 'packages')
-        );
+        return view('Studio-819.administrator.adminpackages', compact(
+            'adminName',
+            'packages',
+            'addons',
+            'backdrops'
+        ));
     }
 
+    public function storePackage(Request $request)
+    {
+        $table = ($request->type == 'package') ? 'packages' : (($request->type == 'addon') ? 'addons' : 'backdrops');
+        $nameCol = $request->type . '_name';
+        $data = [$nameCol => $request->name, 'created_at' => now()];
 
+        if ($request->type == 'package') {
+            $data['base_price'] = $request->price;
+            $data['pax_limit'] = 0; 
+        } elseif ($request->type == 'addon') {
+            $data['price'] = $request->price;
+        }
 
-
-    public function showAdminRegister()
-{
-    $adminName = 'Admin'; // For sidebar/header consistency
-    return view('admin-register', compact('adminName'));
-}
-
-public function registerAdmin(Request $request)
-{
-    // 1. Validate the input
-    $request->validate([
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|string|min:8|confirmed',
-    ]);
-
-    // 2. Find the Admin Role ID (Assuming 'admin' role exists in roles table)
-    $adminRole = DB::table('roles')->where('role_name', 'admin')->first();
-
-    if (!$adminRole) {
-        return back()->withErrors(['email' => 'Admin role not found in database.']);
+        DB::table($table)->insert($data);
+        return back()->with('success', 'Added!');
     }
 
-    // 3. Insert the new Admin user
-    DB::table('users')->insert([
-        'email' => $request->email,
-        'password_hash' => Hash::make($request->password),
-        'role_id' => $adminRole->role_id,
-        'status' => 'Active',
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
+    public function updatePackage(Request $request)
+    {
+        $table = ($request->type == 'package') ? 'packages' : (($request->type == 'addon') ? 'addons' : 'backdrops');
+        $idCol = $request->type . '_id';
+        $nameCol = $request->type . '_name';
+        $data = [$nameCol => $request->name];
+        
+        if ($request->type != 'backdrop') {
+            $data[$request->type == 'package' ? 'base_price' : 'price'] = $request->price;
+        }
 
-    return redirect()->route('admin.dashboard')->with('success', 'New Admin account created successfully!');
-}
+        DB::table($table)->where($idCol, $request->id)->update($data);
+        return back()->with('success', 'Updated!');
+    }
 
-    
+    public function deletePackage($type, $id)
+    {
+        $table = ($type == 'package') ? 'packages' : (($type == 'addon') ? 'addons' : 'backdrops');
+        $idCol = $type . '_id';
+        DB::table($table)->where($idCol, $id)->delete();
+        return back()->with('success', 'Deleted!');
+    }
 
+    /* ===========================
+       ADMIN CUSTOMER ACTIONS
+    =========================== */
+    public function updateCustomer(Request $request)
+    {
+        DB::table('customers')
+            ->where('customer_id', $request->customer_id)
+            ->update([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'phone_number' => $request->phone_number,
+            ]);
+
+        $userId = DB::table('customers')->where('customer_id', $request->customer_id)->value('user_id');
+
+        DB::table('users')
+            ->where('user_id', $userId)
+            ->update(['email' => $request->email]);
+
+        return back()->with('success', 'Customer updated successfully!');
+    }
+
+    public function deleteCustomer($id)
+    {
+        $userId = DB::table('customers')->where('customer_id', $id)->value('user_id');
+
+        DB::table('customers')->where('customer_id', $id)->delete();
+        DB::table('users')->where('user_id', $userId)->delete();
+
+        return back()->with('success', 'Customer deleted.');
+    }
 }

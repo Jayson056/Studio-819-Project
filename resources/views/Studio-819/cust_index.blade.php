@@ -15,7 +15,7 @@
     <nav class="navbar navbar-expand-lg custom-navbar">
         <div class="container-fluid container">
             <a class="navbar-brand" href="{{ route('Studio-819/index') }}">
-                <img src="Images/logo.png" alt="Studio 819 Logo" class="navbar-brand-logo">
+                <img src="{{ asset('Images/logo.png') }}" alt="Studio 819 Logo" class="navbar-brand-logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div class="hero-image-right col-lg-6 d-none d-lg-block">
-                <img src="Images/studio_home-bg.png" alt="Studio interior with lighting equipment" class="img-fluid hero-full-image">
+                <img src="{{ asset('Images/studio_home-bg.png') }}" alt="Studio interior with lighting equipment" class="img-fluid hero-full-image">
             </div>
         </div>
     </header>
@@ -65,7 +65,7 @@
             <div class="container">
                 <div class="row d-flex align-items-center">
                     <div class="col-lg-6 mb-4 mb-lg-0">
-                        <img src="Images/about-preview.png" alt="DSLR camera on a tripod head" class="img-fluid about-preview-image">
+                        <img src="{{ asset('Images/about-preview.png') }}" alt="DSLR camera on a tripod head" class="img-fluid about-preview-image">
                     </div>
                     <div class="col-lg-6 about-preview-content">
                         <h2 class="about-headline">About Us</h2>
@@ -98,7 +98,7 @@
                         <!-- BASIC PACKAGE -->
                         <div class="service-card-item col-lg-4 col-md-6 mb-4">
                             <div class="service-card">
-                                <img src="Images/basic-preview.png" alt="Basic Package" class="card-img-top service-img">
+                                <img src="{{ asset('Images/basic-preview.png') }}" alt="Basic Package" class="card-img-top service-img">
                                 <div class="card-content">
                                     <h3 class="card-title">Basic Package</h3>
                                     <p class="card-detail">1-2 pax</p>
@@ -111,7 +111,7 @@
                         <!-- FAMILY PACKAGE -->
                         <div class="service-card-item col-lg-4 col-md-6 mb-4">
                             <div class="service-card">
-                                <img src="Images/family-preview.png" alt="Family Package" class="card-img-top service-img">
+                                <img src="{{ asset('Images/family-preview.png') }}" alt="Family Package" class="card-img-top service-img">
                                 <div class="card-content">
                                     <h3 class="card-title">Family Package</h3>
                                     <p class="card-detail">Up to 4 pax</p>
@@ -124,7 +124,7 @@
                         <!-- PHOTOBOX PACKAGE -->
                         <div class="service-card-item col-lg-4 col-md-6 mb-4">
                             <div class="service-card">
-                                <img src="Images/photobox-preview.png" alt="Photobox Package" class="card-img-top service-img">
+                                <img src="{{ asset('Images/photobox-preview.png') }}" alt="Photobox Package" class="card-img-top service-img">
                                 <div class="card-content">
                                     <h3 class="card-title">Photobox Package</h3>
                                     <p class="card-detail">1-2 pax</p>
@@ -137,7 +137,7 @@
                         <!-- LITE PACKAGE -->
                         <div class="service-card-item col-lg-4 col-md-6 mb-4">
                             <div class="service-card">
-                                <img src="Images/lite-preview.png" alt="Lite Package" class="card-img-top service-img">
+                                <img src="{{ asset('Images/lite-preview.png') }}" alt="Lite Package" class="card-img-top service-img">
                                 <div class="card-content">
                                     <h3 class="card-title">Lite Package</h3>
                                     <p class="card-detail">1-2 pax</p>
@@ -150,7 +150,7 @@
                         <!-- CHRISTMAS PACKAGE -->
                         <div class="service-card-item col-lg-4 col-md-6 mb-4">
                             <div class="service-card">
-                                <img src="Images/christmas-family-preview.png" alt="Christmas Family Package" class="card-img-top service-img">
+                                <img src="{{ asset('Images/christmas-family-preview.png') }}" alt="Christmas Family Package" class="card-img-top service-img">
                                 <div class="card-content">
                                     <h3 class="card-title">Christmas Family/Group</h3>
                                     <p class="card-detail">Up to 5 pax</p>
@@ -163,7 +163,7 @@
                         <!-- YEARBOOK PACKAGE -->
                         <div class="service-card-item col-lg-4 col-md-12 mb-4">
                             <div class="service-card">
-                                <img src="Images/yearbook-preview.png" alt="Yearbook Package" class="card-img-top service-img">
+                                <img src="{{ asset('Images/yearbook-preview.png') }}" alt="Yearbook Package" class="card-img-top service-img">
                                 <div class="card-content">
                                     <h3 class="card-title">Yearbook Package</h3>
                                     <p class="card-detail">1-3 pax</p>

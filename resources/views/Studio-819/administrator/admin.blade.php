@@ -8,40 +8,65 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+    <link rel="stylesheet" href="{{ asset('css/glass.css') }}">
     <style>
-        :root {
-            --brand-color: #5a2025; /* Updated to match your Studio-819 brand red */
-            --brand-color-hover: #45181c;
-            --brand-color-rgb: 90, 32, 37;
+        .mesh-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(90, 32, 37, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(162, 58, 67, 0.15) 0%, transparent 40%);
+            z-index: -1;
+        }
+        
+        body {
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
         }
 
-        body {
-            background: url("{{ asset('Images/BG.png') }}") center/cover no-repeat;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-            min-vh-100;
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 28px;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 12px;
+            padding: 12px 16px;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #a23a43;
+            color: white;
+            box-shadow: 0 0 20px rgba(162, 58, 67, 0.2);
         }
 
         .btn-primary {
-            background-color: var(--brand-color) !important;
-            border-color: var(--brand-color) !important;
+            background: linear-gradient(135deg, #5a2025 0%, #a23a43 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
-            background-color: var(--brand-color-hover) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(90, 32, 37, 0.4);
         }
-
-        .text-primary { color: var(--brand-color) !important; }
-
-        .form-control:focus {
-            border-color: var(--brand-color);
-            box-shadow: 0 0 0 0.25rem rgba(var(--brand-color-rgb), 0.25);
-        }
-
-        .card { border-radius: 15px; overflow: hidden; }
     </style>
 </head>
 
-<body class="bg-light d-flex align-items-center justify-content-center min-vh-100 p-3">
+<body>
+    <div class="mesh-bg"></div>
 
     <div class="container">
         <div class="row justify-content-center">
@@ -55,24 +80,24 @@
                 @endif
 
                 {{-- Login Card --}}
-                <div class="card shadow-lg border-0" id="login-container">
+                <div class="glass-card shadow-lg border-0" id="login-container">
                     <div class="card-body p-4 p-md-5">
                         <div class="text-center mb-4">
-                            <h2 class="fw-bold text-dark">Admin Login</h2>
+                            <h2 class="fw-bold text-white">Admin Login</h2>
                             <p class="text-secondary small">Access the administrative dashboard</p>
                         </div>
 
                         <form action="{{ route('admin.login.submit') }}" method="POST">
                             @csrf
                             <div class="mb-3">
-                                <label class="form-label">Email Address</label>
+                                <label class="form-label text-white opacity-75">Email Address</label>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror" 
                                        name="email" value="{{ old('email') }}" required>
                                 @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Password</label>
+                                <label class="form-label text-white opacity-75">Password</label>
                                 <div class="input-group">
                                     <input type="password" class="form-control" name="password" id="loginPassword" required>
                                     <button class="btn btn-outline-secondary toggle-pass" type="button" data-target="loginPassword">
@@ -97,10 +122,10 @@
                 </div>
 
                 {{-- Sign Up Card --}}
-                <div class="card shadow-lg border-0 d-none" id="signup-container">
+                <div class="glass-card shadow-lg border-0 d-none" id="signup-container">
                     <div class="card-body p-4 p-md-5">
                         <div class="text-center mb-4">
-                            <h2 class="fw-bold text-dark">Register Admin</h2>
+                            <h2 class="fw-bold text-white">Register Admin</h2>
                             <p class="text-secondary small">Authorized staff registration only</p>
                         </div>
 

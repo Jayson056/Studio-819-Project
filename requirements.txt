@@ -1,16 +1,6 @@
-{
-    "require": {
-        "php": "^8.0",
-        "fideloper/proxy": "^4.4",
-        "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^10.0",
-        "laravel/tinker": "^2.0"
-    },
-    "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.7",
-        "fakerphp/faker": "^1.9.1",
-        "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^6.1"
-    }
-}
+flask
+google-generativeai
+python-dotenv
+requests
+Pillow
+gunicorn

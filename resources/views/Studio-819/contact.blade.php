@@ -179,7 +179,7 @@
     <nav class="navbar navbar-expand-lg custom-navbar">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="Images/logo.png" alt="Studio 819 Logo" class="navbar-brand-logo">
+                <img src="{{ asset('Images/logo.png') }}" alt="Studio 819 Logo" class="navbar-brand-logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -244,7 +244,7 @@
 
     <footer class="footer-simple">
         <div class="container">
-            <img src="Images/logo.png" alt="Studio 819" height="40" class="mb-3" style="opacity: 0.8;">
+            <img src="{{ asset('Images/logo.png') }}" alt="Studio 819" height="40" class="mb-3" style="opacity: 0.8;">
             <p class="mb-2">172 General Luna St., Herrera, Malabon City</p>
             <p class="small opacity-75">&copy; 2026 Studio 819. All rights reserved.</p>
         </div>
